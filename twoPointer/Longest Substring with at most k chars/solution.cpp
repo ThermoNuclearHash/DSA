@@ -2,6 +2,8 @@
 #include <map>
 using namespace std;
 
+//https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/1
+
 int longestKSubstr(string s, int k) {
     int len = s.length();
     map<char, int> mp;
