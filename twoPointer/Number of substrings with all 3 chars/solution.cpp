@@ -1,25 +1,17 @@
 #include <string>
+#include <algorithm>
 using namespace std;
 
 //https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
 
 int numberOfSubstrings(string s) {
-    int hash[3] = {0, 0, 0};
-    int lenOfChars = 0;
-    int l = 0, r = 0, n = s.length(), ans = 0;
-    while(r < n && l < n) {
-        if(hash[s[r]-'a'] == 0) lenOfChars++;
-        hash[s[r]-'a']++;
-        if(lenOfChars == 3) {
-            ans += n-r;
-            hash[s[l]-'a']--;
-            if(hash[s[l]-'a'] == 0) lenOfChars--;
-            l++;
-            hash[s[r]-'a']--;
-            if(hash[s[r]-'a'] == 0) lenOfChars--;
-            r--;
+    int hash[3] = {-1, -1, -1};
+    int n = s.length(), ans = 0;
+    for(int i = 0; i < n; i++) {
+        hash[s[i]-'a'] = i;
+        if(hash[0] != -1 && hash[1] != -1 && hash[2] != -1) {
+            ans += (1+min({hash[0], hash[1], hash[2]}));
         }
-        r++;
     }
     return ans;
 }
